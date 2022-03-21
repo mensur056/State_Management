@@ -8,8 +8,16 @@ class OnBoardView extends StatefulWidget {
   State<OnBoardView> createState() => _OnBoardViewState();
 }
 
-class _OnBoardViewState extends State<OnBoardView> {
+class _OnBoardViewState extends State<OnBoardView>
+    with SingleTickerProviderStateMixin {
   final String _skipTitle = 'Skip';
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +29,25 @@ class _OnBoardViewState extends State<OnBoardView> {
         actions: [TextButton(onPressed: () {}, child: Text(_skipTitle))],
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.chevron_left_rounded,color: Colors.green,),
+          icon: const Icon(
+            Icons.chevron_left_rounded,
+            color: Colors.green,
+          ),
         ),
+      ),
+      body: Column(
+        children: [
+          const Text("Hello"),
+          const Text("Hello World"),
+          Image.asset('assets/images/ic_chef.png'),
+          Row(
+            children: [
+              TabPageSelector(
+                controller: _tabController,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
