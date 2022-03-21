@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'on_board_models.dart';
+import 'package:state_management/feature/onboard/on_board_models.dart';
 
 class OnBoardCard extends StatelessWidget {
   const OnBoardCard({Key? key, required this.model}) : super(key: key);
@@ -12,8 +11,9 @@ class OnBoardCard extends StatelessWidget {
       children: [
         Text(model.title),
         Text(model.description),
-        Image.asset(model.imageWithPath)
+        Image.asset(model.imageWithPath),
       ],
     );
+    ;
   }
 }

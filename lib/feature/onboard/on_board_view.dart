@@ -12,7 +12,6 @@ class OnBoardView extends StatefulWidget {
 
 class _OnBoardViewState extends State<OnBoardView>
     with SingleTickerProviderStateMixin {
-  final String _skipTitle = 'Skip';
   late final TabController _tabController;
 
   @override
@@ -22,6 +21,9 @@ class _OnBoardViewState extends State<OnBoardView>
         TabController(length: OnBoardModels.onBoardItems.length, vsync: this);
   }
 
+  final String title = 'Skip';
+  final IconData icon = Icons.chevron_left_rounded;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,24 +31,20 @@ class _OnBoardViewState extends State<OnBoardView>
         backgroundColor: Colors.white,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        actions: [TextButton(onPressed: () {}, child: Text(_skipTitle))],
+        actions: [TextButton(onPressed: () {}, child: Text(title))],
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(
-            Icons.chevron_left_rounded,
-            color: Colors.green,
-          ),
+          icon: Icon(icon),
         ),
       ),
       body: Column(
         children: [
           Expanded(
             child: PageView.builder(
-              itemCount: OnBoardModels.onBoardItems.length,
-              itemBuilder: (context, index) {
-                return OnBoardCard(model: OnBoardModels.onBoardItems[index]);
-              },
-            ),
+                itemCount: OnBoardModels.onBoardItems.length,
+                itemBuilder: (context, index) {
+                  return OnBoardCard(model: OnBoardModels.onBoardItems[index]);
+                }),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
