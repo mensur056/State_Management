@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:state_management/feature/onboard/on_board_card.dart';
+import 'package:state_management/feature/onboard/on_board_models.dart';
 
 class OnBoardView extends StatefulWidget {
   const OnBoardView({Key? key}) : super(key: key);
@@ -16,7 +18,8 @@ class _OnBoardViewState extends State<OnBoardView>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController =
+        TabController(length: OnBoardModels.onBoardItems.length, vsync: this);
   }
 
   @override
@@ -37,10 +40,16 @@ class _OnBoardViewState extends State<OnBoardView>
       ),
       body: Column(
         children: [
-          const Text("Hello"),
-          const Text("Hello World"),
-          Image.asset('assets/images/ic_chef.png'),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Expanded(
+            child: PageView.builder(
+              itemCount: OnBoardModels.onBoardItems.length,
+              itemBuilder: (context, index) {
+                return OnBoardCard(model: OnBoardModels.onBoardItems[index]);
+              },
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TabPageSelector(
                 controller: _tabController,

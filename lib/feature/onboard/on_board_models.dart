@@ -7,3 +7,11 @@ class OnBoardModel {
 
   String get imageWithPath => 'assets/images/$imageName.png';
 }
+
+class OnBoardModels {
+  static final List<OnBoardModel> onBoardItems = [
+    OnBoardModel('title', "description", 'ic_chef'),
+    OnBoardModel('title', "description", 'ic_delivery'),
+    OnBoardModel('title', "description", 'ic_door'),
+  ];
+}
