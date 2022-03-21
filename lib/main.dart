@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/feature/onboard/on_board_view.dart';
 
 void main() => runApp(const MyApp());
 
@@ -7,19 +8,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hello',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App'),
-        ),
-        body: Center(
-          child: Container(
-            color: Colors.red,
-            child: const Text('Hello'),
-          ),
-        ),
-      ),
+    return const MaterialApp(home: OnBoardView(),
     );
   }
 }
