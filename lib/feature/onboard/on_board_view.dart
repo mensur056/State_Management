@@ -40,11 +40,15 @@ class _OnBoardViewState extends State<OnBoardView>
           const Text("Hello"),
           const Text("Hello World"),
           Image.asset('assets/images/ic_chef.png'),
-          Row(
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TabPageSelector(
                 controller: _tabController,
               ),
+              FloatingActionButton(
+                onPressed: () {},
+                child: const Text('Next'),
+              )
             ],
           )
         ],
