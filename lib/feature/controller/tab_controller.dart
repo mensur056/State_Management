@@ -4,13 +4,24 @@ import '../onboard/on_board_models.dart';
 
 class TabIndicator extends StatefulWidget {
   const TabIndicator({Key? key, required this.selectedIndex}) : super(key: key);
-final int selectedIndex;
+  final int selectedIndex;
+
   @override
   State<TabIndicator> createState() => _TabIndicatorState();
 }
 
-class _TabIndicatorState extends State<TabIndicator> with SingleTickerProviderStateMixin {
+class _TabIndicatorState extends State<TabIndicator>
+    with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+
+  @override
+  void didUpdateWidget(covariant TabIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedIndex != widget.selectedIndex) {
+      _tabController.animateTo(widget.selectedIndex);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -20,7 +31,6 @@ class _TabIndicatorState extends State<TabIndicator> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return TabPageSelector(
-        controller: _tabController);
+    return TabPageSelector(controller: _tabController);
   }
 }
