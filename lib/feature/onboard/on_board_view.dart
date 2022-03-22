@@ -13,6 +13,8 @@ class OnBoardView extends StatefulWidget {
 
 class _OnBoardViewState extends State<OnBoardView> {
   int _selectedIndex = 0;
+  final String _start = 'Start';
+  final String _next = 'Next';
 
   bool get _isLastPage =>
       OnBoardModels.onBoardItems.length - 1 == _selectedIndex;
@@ -71,7 +73,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                   onPressed: () {
                     _incrementAndChange();
                   },
-                  child: Text(_isLastPage ? 'Start' : 'Next'),
+                  child: Text(_isLastPage ? _start : _next),
                 )
               ],
             )
