@@ -21,16 +21,16 @@ class _OnBoardViewState extends State<OnBoardView> {
 
   bool get _isFirstPage => _selectedIndex == 0;
 
-  void _incrementAndChange() {
+  void _incrementAndChange([int? value]) {
     if (_isLastPage) {
       return;
     }
-    _incrementSelectedPage();
+    _incrementSelectedPage(value);
   }
 
-  void _incrementSelectedPage() {
+  void _incrementSelectedPage([int? value]) {
     setState(() {
-      _selectedIndex++;
+      _selectedIndex = value ?? _selectedIndex++;
     });
   }
 
@@ -61,6 +61,9 @@ class _OnBoardViewState extends State<OnBoardView> {
           children: [
             Expanded(
               child: PageView.builder(
+                  onPageChanged: (value) {
+                    _incrementAndChange(value);
+                  },
                   itemCount: OnBoardModels.onBoardItems.length,
                   itemBuilder: (context, index) {
                     return OnBoardCard(
