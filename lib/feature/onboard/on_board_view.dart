@@ -14,8 +14,11 @@ class OnBoardView extends StatefulWidget {
 class _OnBoardViewState extends State<OnBoardView> {
   int _selectedIndex = 0;
 
+  bool get _isLastPage =>
+      OnBoardModels.onBoardItems.length - 1 == _selectedIndex;
+
   void _incrementAndChange() {
-    if (_selectedIndex == OnBoardModels.onBoardItems.length - 1) {
+    if (_isLastPage) {
       return;
     }
     _incrementSelectedPage();
@@ -25,11 +28,6 @@ class _OnBoardViewState extends State<OnBoardView> {
     setState(() {
       _selectedIndex++;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   final String title = 'Skip';
@@ -51,30 +49,34 @@ class _OnBoardViewState extends State<OnBoardView> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-                itemCount: OnBoardModels.onBoardItems.length,
-                itemBuilder: (context, index) {
-                  return OnBoardCard(model: OnBoardModels.onBoardItems[index]);
-                }),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TabIndicator(
-                selectedIndex: _selectedIndex,
-              ),
-              FloatingActionButton(
-                onPressed: () {
-                  _incrementAndChange();
-                },
-                child: const Text('Next'),
-              )
-            ],
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20),
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                  itemCount: OnBoardModels.onBoardItems.length,
+                  itemBuilder: (context, index) {
+                    return OnBoardCard(
+                        model: OnBoardModels.onBoardItems[index]);
+                  }),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TabIndicator(
+                  selectedIndex: _selectedIndex,
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    _incrementAndChange();
+                  },
+                  child: Text(_isLastPage ? 'Start' : 'Next'),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
