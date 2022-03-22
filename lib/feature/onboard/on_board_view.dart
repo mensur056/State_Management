@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:state_management/feature/controller/tab_controller.dart';
 import 'package:state_management/feature/onboard/on_board_card.dart';
 import 'package:state_management/feature/onboard/on_board_models.dart';
 
@@ -10,9 +11,7 @@ class OnBoardView extends StatefulWidget {
   State<OnBoardView> createState() => _OnBoardViewState();
 }
 
-class _OnBoardViewState extends State<OnBoardView>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+class _OnBoardViewState extends State<OnBoardView> {
   int _selectedIndex = 0;
 
   void _incrementAndChange() {
@@ -20,7 +19,6 @@ class _OnBoardViewState extends State<OnBoardView>
       return;
     }
     _incrementSelectedPage();
-    _changeIndicator(_selectedIndex);
   }
 
   void _incrementSelectedPage() {
@@ -29,15 +27,9 @@ class _OnBoardViewState extends State<OnBoardView>
     });
   }
 
-  void _changeIndicator(int value) {
-    _tabController.animateTo(value);
-  }
-
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: OnBoardModels.onBoardItems.length, vsync: this);
   }
 
   final String title = 'Skip';
@@ -71,8 +63,8 @@ class _OnBoardViewState extends State<OnBoardView>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TabPageSelector(
-                controller: _tabController,
+              TabIndicator(
+                selectedIndex: _selectedIndex,
               ),
               FloatingActionButton(
                 onPressed: () {
