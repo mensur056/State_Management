@@ -13,6 +13,25 @@ class OnBoardView extends StatefulWidget {
 class _OnBoardViewState extends State<OnBoardView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+  int _selectedIndex = 0;
+
+  void _incrementAndChange() {
+    if (_selectedIndex == OnBoardModels.onBoardItems.length - 1) {
+      return;
+    }
+    _incrementSelectedPage();
+    _changeIndicator(_selectedIndex);
+  }
+
+  void _incrementSelectedPage() {
+    setState(() {
+      _selectedIndex++;
+    });
+  }
+
+  void _changeIndicator(int value) {
+    _tabController.animateTo(value);
+  }
 
   @override
   void initState() {
@@ -34,7 +53,10 @@ class _OnBoardViewState extends State<OnBoardView>
         actions: [TextButton(onPressed: () {}, child: Text(title))],
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(icon),
+          icon: Icon(
+            icon,
+            color: Colors.black,
+          ),
         ),
       ),
       body: Column(
@@ -53,7 +75,9 @@ class _OnBoardViewState extends State<OnBoardView>
                 controller: _tabController,
               ),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  _incrementAndChange();
+                },
                 child: const Text('Next'),
               )
             ],
