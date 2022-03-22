@@ -19,6 +19,8 @@ class _OnBoardViewState extends State<OnBoardView> {
   bool get _isLastPage =>
       OnBoardModels.onBoardItems.length - 1 == _selectedIndex;
 
+  bool get _isFirstPage => _selectedIndex == 0;
+
   void _incrementAndChange() {
     if (_isLastPage) {
       return;
@@ -43,13 +45,15 @@ class _OnBoardViewState extends State<OnBoardView> {
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [TextButton(onPressed: () {}, child: Text(title))],
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            icon,
-            color: Colors.black,
-          ),
-        ),
+        leading: _isFirstPage
+            ? null
+            : IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  icon,
+                  color: Colors.black,
+                ),
+              ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20),
