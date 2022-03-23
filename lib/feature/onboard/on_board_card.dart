@@ -14,6 +14,6 @@ class OnBoardCard extends StatelessWidget {
         Image.asset(model.imageWithPath),
       ],
     );
-    ;
+
   }
 }

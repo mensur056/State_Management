@@ -98,7 +98,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                 ),
                 FloatingActionButton(
                   onPressed: () {
-                    _incrementSelectedPage();
+                    _incrementAndChange();
                   },
                   child: Text(_isLastPage ? _start : _next),
                 )
