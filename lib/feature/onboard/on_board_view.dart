@@ -20,9 +20,10 @@ class _OnBoardViewState extends State<OnBoardView> {
       OnBoardModels.onBoardItems.length - 1 == _selectedIndex;
 
   bool get _isFirstPage => _selectedIndex == 0;
+  ValueNotifier<bool> isBAckEnable = ValueNotifier(false);
 
   void _incrementAndChange([int? value]) {
-    if (_isLastPage) {
+    if (_isLastPage && value == null) {
       return;
     }
     _incrementSelectedPage(value);
@@ -56,7 +57,7 @@ class _OnBoardViewState extends State<OnBoardView> {
               ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20),
+        padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
         child: Column(
           children: [
             Expanded(
