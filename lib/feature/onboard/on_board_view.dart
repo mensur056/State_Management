@@ -38,7 +38,11 @@ class _OnBoardViewState extends State<OnBoardView> {
 
   void _incrementSelectedPage([int? value]) {
     setState(() {
-      _selectedIndex = value ?? _selectedIndex++;
+      if (value != null) {
+        _selectedIndex = value;
+      } else {
+        _selectedIndex++;
+      }
     });
   }
 
@@ -53,10 +57,12 @@ class _OnBoardViewState extends State<OnBoardView> {
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [
-          ValueListenableBuilder(
+          ValueListenableBuilder<bool>(
               valueListenable: isBackEnable,
-              builder: (BuildContext context, dynamic value, Widget? child) {
-                return TextButton(onPressed: () {}, child: Text(title));
+              builder: (BuildContext context, bool value, Widget? child) {
+                return value
+                    ? const SizedBox()
+                    : TextButton(onPressed: () {}, child: Text(title));
               })
         ],
         leading: _isFirstPage
@@ -92,7 +98,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                 ),
                 FloatingActionButton(
                   onPressed: () {
-                    _incrementAndChange();
+                    _incrementSelectedPage();
                   },
                   child: Text(_isLastPage ? _start : _next),
                 )
