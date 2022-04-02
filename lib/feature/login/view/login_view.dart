@@ -9,7 +9,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
-        children: [Image.asset(ImageEnums.door.toPath)],
+        children: [ImageEnums.door.toImage],
       ),
     );
   }
