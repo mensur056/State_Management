@@ -16,23 +16,27 @@ class LoginView extends StatelessWidget {
             padding: const EdgeInsets.only(left: 90, right: 90),
             child: ImageEnums.door.toImage,
           ),
-          const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ), ElevatedButton(
+                  onPressed: () {},
+                  child: Center(child: Text(buttonText)),
+                ),
+                CheckboxListTile(
+                  title:Text(checkBoxTitle),
+                  value: true,
+                  onChanged: (value) {},
+                )
+              ],
             ),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text(buttonText),
-          ),
-          CheckboxListTile(
-            title:Text(checkBoxTitle),
-            value: true,
-            onChanged: (value) {},
-          )
+
         ],
       ),
     );
