@@ -11,7 +11,7 @@ class LoginView extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only( left: 60, right: 60),
+            padding: const EdgeInsets.only( left: 90, right: 90),
             child: ImageEnums.door.toImage,
           )
         ],
