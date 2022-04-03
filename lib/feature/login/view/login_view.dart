@@ -1,14 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:state_management/feature/login/view/login_view_model.dart';
 import 'package:state_management/product/constants/image_enum.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   final String buttonText = 'Login';
-  final String checkBoxTitle = 'Remember';
+  final String checkBoxTitle = 'Remember me';
   final String pageTitle = 'Login';
+  late final LoginViewModel _loginViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginViewModel = LoginViewModel();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: _loginViewModel,
+      builder: (context, child) {
+        return bodyView(context);
+      },
+    );
+  }
+
+  Scaffold bodyView(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -37,8 +61,12 @@ class LoginView extends StatelessWidget {
                   ),
                   CheckboxListTile(
                     title: Text(checkBoxTitle),
-                    value: true,
-                    onChanged: (value) {},
+                    value: context.watch<LoginViewModel>().isCheckBox,
+                    onChanged: (value) {
+                      context
+                          .read<LoginViewModel>()
+                          .changeCheckBox(value ?? false);
+                    },
                   )
                 ],
               ),
