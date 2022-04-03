@@ -5,6 +5,7 @@ class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
   final String buttonText = 'Login';
   final String checkBoxTitle = 'Remember';
+  final String pageTitle = 'Login';
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,10 @@ class LoginView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 90, right: 90),
               child: ImageEnums.door.toImage,
             ),
+            Text(
+              pageTitle,
+              style: const TextStyle(color: Colors.black, fontSize: 30),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -25,19 +30,19 @@ class LoginView extends StatelessWidget {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                     ),
-                  ), ElevatedButton(
+                  ),
+                  ElevatedButton(
                     onPressed: () {},
                     child: Center(child: Text(buttonText)),
                   ),
                   CheckboxListTile(
-                    title:Text(checkBoxTitle),
+                    title: Text(checkBoxTitle),
                     value: true,
                     onChanged: (value) {},
                   )
                 ],
               ),
             ),
-
           ],
         ),
       ),
