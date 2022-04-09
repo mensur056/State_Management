@@ -60,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: context.watch<LoginViewModel>().isLoading
+                    onPressed: _loginViewModel.isLoading
                         ? null
                         : () {
                             _loginViewModel.controllerTextValue();
