@@ -32,6 +32,8 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  final String _hintText = 'Name';
+
   Scaffold bodyView(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
@@ -50,9 +52,10 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  const TextField(
+                  TextField(
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      hintText: _hintText,
+                      border: const OutlineInputBorder(),
                     ),
                   ),
                   ElevatedButton(
