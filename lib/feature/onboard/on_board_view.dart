@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:state_management/feature/controller/tab_controller.dart';
 import 'package:state_management/feature/onboard/on_board_card.dart';
 import 'package:state_management/feature/onboard/on_board_models.dart';
+import 'package:state_management/product/model/state/user_context.dart';
 
 class OnBoardView extends StatefulWidget {
   const OnBoardView({Key? key}) : super(key: key);
@@ -52,29 +54,7 @@ class _OnBoardViewState extends State<OnBoardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        actions: [
-          ValueListenableBuilder<bool>(
-              valueListenable: isBackEnable,
-              builder: (BuildContext context, bool value, Widget? child) {
-                return value
-                    ? const SizedBox()
-                    : TextButton(onPressed: () {}, child: Text(title));
-              })
-        ],
-        leading: _isFirstPage
-            ? null
-            : IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  icon,
-                  color: Colors.black,
-                ),
-              ),
-      ),
+      appBar: buildAppBar(context),
       body: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
         child: Column(
@@ -107,6 +87,38 @@ class _OnBoardViewState extends State<OnBoardView> {
           ],
         ),
       ),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Center(
+        child: Text(
+          context.read<UserContext>().name,
+          style: const TextStyle(color: Colors.red),
+        ),
+      ),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      actions: [
+        ValueListenableBuilder<bool>(
+            valueListenable: isBackEnable,
+            builder: (BuildContext context, bool value, Widget? child) {
+              return value
+                  ? const SizedBox()
+                  : TextButton(onPressed: () {}, child: Text(title));
+            })
+      ],
+      leading: _isFirstPage
+          ? null
+          : IconButton(
+              onPressed: () {},
+              icon: Icon(
+                icon,
+                color: Colors.black,
+              ),
+            ),
     );
   }
 }
