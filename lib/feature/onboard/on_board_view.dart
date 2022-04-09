@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:state_management/feature/controller/tab_controller.dart';
 import 'package:state_management/feature/onboard/on_board_card.dart';
 import 'package:state_management/feature/onboard/on_board_models.dart';
+import 'package:state_management/product/model/state/project_context.dart';
 import 'package:state_management/product/model/state/user_context.dart';
 
 class OnBoardView extends StatefulWidget {
@@ -94,7 +95,7 @@ class _OnBoardViewState extends State<OnBoardView> {
     return AppBar(
       title: Center(
         child: Text(
-          context.read<UserContext>().name,
+          context.watch<ProductContext>().newUserName,
           style: const TextStyle(color: Colors.red),
         ),
       ),
@@ -103,12 +104,17 @@ class _OnBoardViewState extends State<OnBoardView> {
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       actions: [
         ValueListenableBuilder<bool>(
-            valueListenable: isBackEnable,
-            builder: (BuildContext context, bool value, Widget? child) {
-              return value
-                  ? const SizedBox()
-                  : TextButton(onPressed: () {}, child: Text(title));
-            })
+          valueListenable: isBackEnable,
+          builder: (BuildContext context, bool value, Widget? child) {
+            return value
+                ? const SizedBox()
+                : TextButton(
+                    onPressed: () {
+                      context.read<ProductContext>().changeName('Mansur');
+                    },
+                    child: Text(title));
+          },
+        )
       ],
       leading: _isFirstPage
           ? null
