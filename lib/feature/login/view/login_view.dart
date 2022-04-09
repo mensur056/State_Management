@@ -35,7 +35,9 @@ class _LoginViewState extends State<LoginView> {
 
   Scaffold bodyView(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: _progressIndicator(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -79,5 +81,15 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  Widget _progressIndicator() {
+    return Consumer<LoginViewModel>(builder: (context, value, child) {
+      return value.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : const SizedBox();
+    });
   }
 }
