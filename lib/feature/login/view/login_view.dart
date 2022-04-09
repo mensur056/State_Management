@@ -22,7 +22,6 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
     _loginViewModel = LoginViewModel();
-    print(context.read<UserContext>().name);
   }
 
   @override
@@ -38,6 +37,7 @@ class _LoginViewState extends State<LoginView> {
   Scaffold bodyView(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(context.read<UserContext>().name),
         leading: _progressIndicator(),
       ),
       body: SingleChildScrollView(
