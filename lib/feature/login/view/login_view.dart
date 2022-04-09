@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/feature/login/view/login_view_model.dart';
 import 'package:state_management/product/constants/image_enum.dart';
+import 'package:state_management/product/model/state/user_context.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
     _loginViewModel = LoginViewModel();
+    print(context.read<UserContext>().name);
   }
 
   @override

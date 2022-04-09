@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/feature/controller/tab_controller.dart';
+import 'package:state_management/feature/login/view/login_view.dart';
 import 'package:state_management/feature/onboard/on_board_card.dart';
 import 'package:state_management/feature/onboard/on_board_models.dart';
 import 'package:state_management/product/model/state/project_context.dart';
-import 'package:state_management/product/model/state/user_context.dart';
+import 'package:kartal/src/context_extension.dart';
 
 class OnBoardView extends StatefulWidget {
   const OnBoardView({Key? key}) : super(key: key);
@@ -111,6 +112,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                 : TextButton(
                     onPressed: () {
                       context.read<ProductContext>().changeName('Mansur');
+                      context.navigateToPage(const LoginView());
                     },
                     child: Text(title));
           },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:state_management/feature/login/view/login_view.dart';
 import 'package:state_management/feature/onboard/on_board_view.dart';
 import 'package:state_management/product/model/state/project_context.dart';
 import 'package:state_management/product/model/state/user_context.dart';
@@ -15,13 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => ProductContext()),
         ProxyProvider<ProductContext, UserContext>(
             update: (context, productContext, userContext) {
           return userContext != null
               ? userContext.copyWith(name: productContext.newUserName)
               : UserContext(productContext.newUserName);
         }),
-        ChangeNotifierProvider(create: (context) => ProductContext())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
