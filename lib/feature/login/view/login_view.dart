@@ -14,6 +14,7 @@ class _LoginViewState extends State<LoginView> {
   final String buttonText = 'Login';
   final String checkBoxTitle = 'Remember me';
   final String pageTitle = 'Login';
+  final String _hintText = 'Name';
   late final LoginViewModel _loginViewModel;
 
   @override
@@ -31,8 +32,6 @@ class _LoginViewState extends State<LoginView> {
       },
     );
   }
-
-  final String _hintText = 'Name';
 
   Scaffold bodyView(BuildContext context) {
     return Scaffold(
@@ -59,16 +58,18 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: context.watch<LoginViewModel>().isLoading
+                        ? null
+                        : () {
+                            _loginViewModel.controllerTextValue();
+                          },
                     child: Center(child: Text(buttonText)),
                   ),
                   CheckboxListTile(
                     title: Text(checkBoxTitle),
-                    value: context.watch<LoginViewModel>().isCheckBox,
+                    value: _loginViewModel.isCheckBox,
                     onChanged: (value) {
-                      context
-                          .read<LoginViewModel>()
-                          .changeCheckBox(value ?? false);
+                      _loginViewModel.changeCheckBox(value ?? false);
                     },
                   )
                 ],
